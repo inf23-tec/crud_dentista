@@ -1,11 +1,18 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CitasController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/citas', [CitasController::class, 'index'])->name('citas.index');
+
+// Route::get('/citas', function () {
+//     return view('citas.index');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
