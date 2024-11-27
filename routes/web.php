@@ -9,6 +9,7 @@ Route::get('/', function () {
 });
 
 Route::get('/citas', [CitasController::class, 'index'])->name('citas.index');
+Route::post('/citas/crear', [CitasController::class, 'crearIndex'])->name('citas.crear.index');
 Route::post('/citas', [CitasController::class, 'crear'])->name('citas.crear');
 Route::delete('/citas/{id}', [CitasController::class, 'eliminar'])->name('citas.eliminar');
 

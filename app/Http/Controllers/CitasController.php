@@ -14,6 +14,12 @@ class CitasController extends Controller
         return view("citas.index", compact("citas"));
     }
 
+    public function crearIndex()
+    {
+        $citas = Citas::all();
+        return view("citas.crear.index", compact("citas"));
+    }
+
     public function editar(Citas $citas) {}
     public function crear(Request $request)
     {
