@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cliente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Paciente</title>
     <style>
         table {
             border-collapse: collapse;
@@ -22,48 +23,42 @@
 </head>
 <body>
 <div>
-    <form action="{{ route('citas.crear.index') }}" method="POST">
+    <form action="{{ route('paciente.crear.index') }}" method="POST">
         @csrf
         <button type="submit">Crear</button>
     </form>
     <br><br>
 </div>
 <div>
-    <!-- Tabla para mostrar las citas -->
+    <!-- Tabla para mostrar los pacientes -->
     <table>
         <thead>
         <tr>
             <th>ID</th>
-            <th>ID del Cliente</th>
-            <th>ID del Dentista</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Estado</th>
+            <th>Nombre</th>
+            <th>N° de telefono</th>
+            <th>Fecha de nacimiento</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($citas as $cita)
+        @foreach($pacientes as $paciente)
             <tr>
-                <td>{{ $cita->id }}</td>
-                <td>{{ $cita->id_cliente }}</td>
-                <td>{{ $cita->id_dentista }}</td>
-                <td>{{ $cita->fecha }}</td>
-                <td>{{ $cita->hora }}</td>
-                <td>{{ $cita->estado }}</td>
+                <td>{{ $paciente->id }}</td>
+                <td>{{ $paciente->nombre }}</td>
+                <td>{{ $paciente->numero_telefono }}</td>
+                <td>{{ $paciente->fecha_nacimiento }}</td>
                 <td>
-                    <form action="{{ route('citas.eliminar', $cita->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta cita?');">
+                    <form action="{{ route('paciente.eliminar', $paciente->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta cita?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit">Eliminar</button>
                     </form>
                 </td>
-
             </tr>
         @endforeach
         </tbody>
     </table>
 </div>
-<!-- FIN de la tabla -->
-</body>
+</body> 
 </html>

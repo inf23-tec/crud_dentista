@@ -24,19 +24,19 @@ class CitasController extends Controller
     public function crear(Request $request)
     {
         $validarDatos = $request->validate([
-            'id_cliente' => 'required|integer|exists:clientes,id',
+            'id_cliente' => 'required|integer|exists:pacientes,id',
+            'id_dentista' => 'required|integer|exists:dentistas,id',
             'fecha' => 'required|date',
             'hora' => 'required|date_format:H:i',
             'estado' => 'required|in:programada,completada,cancelada',
-            'descripcion' => 'nullable|string|max:255',
         ]);
 
         $citas = Citas::create([
             'id_cliente' => $validarDatos['id_cliente'],
+            'id_dentista' => $validarDatos['id_dentista'],
             'fecha' => $validarDatos['fecha'],
             'hora' => $validarDatos['hora'],
             'estado' => $validarDatos['estado'] ?? 'programada',
-            'descripcion' => $validarDatos['descripcion'] ?? '',
         ]);
 
         return redirect()->route('citas.index')->with('success', 'Cita creada con éxito');

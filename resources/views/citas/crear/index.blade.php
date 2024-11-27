@@ -15,6 +15,11 @@
         <label for="id_cliente">ID Cliente:</label>
         <input type="number" name="id_cliente" id="id_cliente" required>
         <br><br>
+        
+        <!-- Campo de ID del Dentista -->
+        <label for="id_cliente">ID Dentista:</label>
+        <input type="number" name="id_dentista" id="id_dentista" required>
+        <br><br>
 
         <!-- Campo de Fecha -->
         <label for="fecha">Fecha:</label>
@@ -33,11 +38,6 @@
             <option value="completada">Completada</option>
             <option value="cancelada">Cancelada</option>
         </select>
-        <br><br>
-
-        <!-- Campo de Descripción -->
-        <label for="descripcion">Descripción:</label>
-        <textarea name="descripcion" id="descripcion" rows="4" cols="50" placeholder="Ingrese una descripción..."></textarea>
         <br><br>
 
         <!-- Botón para enviar -->

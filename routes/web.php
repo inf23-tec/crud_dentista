@@ -2,11 +2,17 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CitasController;
+use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/paciente', [PacienteController::class, 'index'])->name('paciente.index');
+Route::delete('/paciente/{id}', [PacienteController::class, 'eliminar'])->name('paciente.eliminar');
+Route::post('/paciente/crear', [PacienteController::class, 'crearIndex'])->name('paciente.crear.index');
+Route::post('/paciente', [PacienteController::class, 'crear'])->name('paciente.crear');
 
 Route::get('/citas', [CitasController::class, 'index'])->name('citas.index');
 Route::post('/citas/crear', [CitasController::class, 'crearIndex'])->name('citas.crear.index');
