@@ -27,6 +27,7 @@
             <th>Fecha</th>
             <th>Hora</th>
             <th>Fecha de ultima actualización</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -37,6 +38,14 @@
                 <td>{{ $cita->fecha }}</td>
                 <td>{{ $cita->hora }}</td>
                 <td>{{ $cita->creado_el }}</td>
+                <td>
+                    <form action="{{ route('citas.eliminar', $cita->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta cita?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+
             </tr>
         @endforeach
         </tbody>
