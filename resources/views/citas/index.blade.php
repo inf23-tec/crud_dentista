@@ -1,69 +1,65 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cliente</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 50%;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        button {
-            width: 60px;
-            height: 25px;
-        }
-    </style>
-</head>
-<body>
-<div>
-    <form action="{{ route('citas.crear.index') }}" method="POST">
-        @csrf
-        <button type="submit">Crear</button>
-    </form>
-    <br><br>
-</div>
-<div>
-    <!-- Tabla para mostrar las citas -->
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>ID del Cliente</th>
-            <th>ID del Dentista</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($citas as $cita)
-            <tr>
-                <td>{{ $cita->id }}</td>
-                <td>{{ $cita->id_cliente }}</td>
-                <td>{{ $cita->id_dentista }}</td>
-                <td>{{ $cita->fecha }}</td>
-                <td>{{ $cita->hora }}</td>
-                <td>{{ $cita->estado }}</td>
-                <td>
-                    <form action="{{ route('citas.eliminar', $cita->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta cita?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Eliminar</button>
-                    </form>
-                </td>
-
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-</div>
-<!-- FIN de la tabla -->
-</body>
-</html>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Citas') }}
+        </h2>
+    </x-slot>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="relative overflow-x-auto">
+                {{-- 
+                <form action="{{ route('citas.crear.index') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Crear</button>
+                </form>
+                --}}
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                ID
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                ID Cliente
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                ID Dentista
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Fecha
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Hora
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Estado
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            @foreach ($citas as $cita)
+                            <td>{{ $cita->id }}</td>
+                            <td>{{ $cita->id_cliente }}</td>
+                            <td>{{ $cita->id_dentista }}</td>
+                            <td>{{ $cita->fecha }}</td>
+                            <td>{{ $cita->hora }}</td>
+                            <td>{{ $cita->estado }}</td>
+                            <td>
+                                <form action="{{ route('citas.eliminar', $cita->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta cita?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Eliminar</button>
+                                </form>
+                            </td>
+                            @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

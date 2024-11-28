@@ -1,34 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Crear usuario</title>
-</head>
-<body>
-<!-- Demas opciones del CRUD -->
-<div>
-    <form action="{{ route('paciente.crear') }}" method="POST">
-        @csrf
-        <!-- Campo de Fecha -->
-        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" required>
-        <br><br>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Agregar paciente') }}
+        </h2>
+    </x-slot>
 
-        <!-- Campo de Nombre -->   
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" required>
-        <br><br>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form action="{{ route('paciente.crear') }}" method="POST">
+                        @csrf
+                        <!-- Campo de Fecha -->
+                        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" required>
+                        <br><br>
 
-        <!-- Campo de Número de teléfono -->
-        <label for="numero_telefono">Número de teléfono:</label>
-        <input type="text" name="numero_telefono" id="numero_telefono" required>
-        <br><br>
+                        <!-- Campo de Nombre -->   
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" id="nombre" required>
+                        <br><br>
 
-        <!-- Botón para enviar -->
-        <button type="submit">Crear usuario</button>
-    </form>
-</div>
-</body>
-</html>
+                        <!-- Campo de Número de teléfono -->
+                        <label for="numero_telefono">Número de teléfono:</label>
+                        <input type="text" name="numero_telefono" id="numero_telefono" required>
+                        <br><br>
+
+                        <!-- Botón para enviar -->
+                        <button type="submit">Crear usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

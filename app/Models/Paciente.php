@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Paciente extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'nombre', 'numero_telefono',  'fecha_nacimiento'];
-    public $timestamps = false; // Desactiva el updated_at y created_at
+
+    protected $fillable = ['id', 'nombre', 'numero_telefono', 'fecha_nacimiento'];
+    public function citas()
+    {
+        return $this->hasMany(Citas::class, 'id_cliente', 'id');
+    }
 }
