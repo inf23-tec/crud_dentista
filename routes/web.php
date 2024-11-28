@@ -5,14 +5,14 @@ use App\Http\Controllers\CitasController;
 use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/paciente', [PacienteController::class, 'index'])->name('paciente.index');
 Route::delete('/paciente/{id}', [PacienteController::class, 'eliminar'])->name('paciente.eliminar');
 Route::post('/paciente/crear', [PacienteController::class, 'crearIndex'])->name('paciente.crear.index');
 Route::post('/paciente', [PacienteController::class, 'crear'])->name('paciente.crear');
+
+Route::post('/paciente/editar/{id}', [PacienteController::class, 'editar'])->name('paciente.editar.index');
+Route::post('/paciente/actualizar/{id}', [PacienteController::class, 'actualizar'])->name('paciente.actualizar');
+
 
 Route::get('/citas', [CitasController::class, 'index'])->name('citas.index');
 Route::post('/citas/crear', [CitasController::class, 'crearIndex'])->name('citas.crear.index');
@@ -24,7 +24,7 @@ Route::delete('/citas/{id}', [CitasController::class, 'eliminar'])->name('citas.
 //     return view('citas.index');
 // });
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

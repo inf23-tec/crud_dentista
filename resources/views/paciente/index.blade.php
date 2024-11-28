@@ -16,7 +16,7 @@
             text-align: left;
         }
         button {
-            width: 60px;
+            width: 100px;
             height: 25px;
         }
     </style>
@@ -25,7 +25,7 @@
 <div>
     <form action="{{ route('paciente.crear.index') }}" method="POST">
         @csrf
-        <button type="submit">Crear</button>
+        <button type="submit">Crear usuario</button>
     </form>
     <br><br>
 </div>
@@ -49,16 +49,32 @@
                 <td>{{ $paciente->numero_telefono }}</td>
                 <td>{{ $paciente->fecha_nacimiento }}</td>
                 <td>
-                    <form action="{{ route('paciente.eliminar', $paciente->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta cita?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Eliminar</button>
-                    </form>
+                    <div style="display: flex; gap: 10px">
+                        <form action="{{ route('paciente.eliminar', $paciente->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta cita?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Eliminar</button>
+                        </form>
+                        <a href=""></a>
+                        <form action="{{ route('paciente.editar.index', $paciente->id) }}", method="POST">
+                            @csrf
+                            <button type="submit">Editar</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
+    <br><br>
+</div>
+<div>
+    @if ($pacientes->count() > 0)
+        <form action="{{ route('citas.crear.index') }}" method="POST">
+            @csrf
+            <button type="submit">Crear cita</button>
+        </form>
+    @endif
 </div>
 </body> 
 </html>

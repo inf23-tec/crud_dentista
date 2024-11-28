@@ -20,7 +20,6 @@ class CitasController extends Controller
         return view("citas.crear.index", compact("citas"));
     }
 
-    public function editar(Citas $citas) {}
     public function crear(Request $request)
     {
         $validarDatos = $request->validate([

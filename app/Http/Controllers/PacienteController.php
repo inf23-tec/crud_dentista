@@ -45,6 +45,27 @@ class PacienteController extends Controller
 
         return redirect()->route('paciente.index')->with('success', 'Paciente eliminado y contador ID reseteado con éxito.');
     }
+
+    public function editar($id)
+    {
+        $paciente = Paciente::findOrFail($id);
+        return view('paciente.editar.index', compact('paciente'));
+    }
+
+    // Actualizar los datos del paciente
+    public function actualizar(Request $request, $id)
+    {
+        $paciente = Paciente::findOrFail($id);
+
+        $paciente->update([
+            'nombre' => $request->input('nombre'),
+            'numero_telefono' => $request->input('numero_telefono'),
+            'fecha_nacimiento' => $request->input('fecha_nacimiento'),
+        ]);
+
+        return redirect()->route('paciente.index')->with('success', 'Paciente actualizado correctamente');
+    }
+
     private function resetAutoIncrement()
     {
         // Verificar si la tabla pacientes está vacía
