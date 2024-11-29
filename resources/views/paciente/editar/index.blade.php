@@ -12,15 +12,15 @@
                     <form action="{{ route('paciente.actualizar', $paciente->id) }}" method="POST">
                         @csrf
                         <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $paciente->nombre) }}" required>
+                        <input class="text-black" type="text" name="nombre" id="nombre" value="{{ old('nombre', $paciente->nombre) }}" required>
                         <br><br>
 
                         <label for="numero_telefono">Número de teléfono:</label>
-                        <input type="text" name="numero_telefono" id="numero_telefono" value="{{ old('numero_telefono', $paciente->numero_telefono) }}" required>
+                        <input class="text-black" type="text" name="numero_telefono" id="numero_telefono" value="{{ old('numero_telefono', $paciente->numero_telefono) }}" required>
                         <br><br>
 
                         <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', $paciente->fecha_nacimiento) }}" required>
+                        <input class="text-black" type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', $paciente->fecha_nacimiento) }}" required>
                         <br><br>
 
                         <button type="submit">Actualizar</button>

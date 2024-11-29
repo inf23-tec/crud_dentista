@@ -13,17 +13,17 @@
                         @csrf
                         <!-- Campo de Fecha -->
                         <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" required>
+                        <input class="text-black" type="date" name="fecha_nacimiento" id="fecha_nacimiento" required>
                         <br><br>
 
                         <!-- Campo de Nombre -->   
                         <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" id="nombre" required>
+                        <input class="text-black" type="text" name="nombre" id="nombre" required>
                         <br><br>
 
                         <!-- Campo de Número de teléfono -->
                         <label for="numero_telefono">Número de teléfono:</label>
-                        <input type="text" name="numero_telefono" id="numero_telefono" required>
+                        <input class="text-black" type="text" name="numero_telefono" id="numero_telefono" required>
                         <br><br>
 
                         <!-- Botón para enviar -->

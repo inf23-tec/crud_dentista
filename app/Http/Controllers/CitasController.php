@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Citas;
+use App\Models\Dentista;
+use App\Models\Paciente;
 use Illuminate\Support\Facades\DB;
 
 class CitasController extends Controller
@@ -11,35 +13,46 @@ class CitasController extends Controller
     public function index()
     {
         $citas = Citas::all();
-        return view("citas.index", compact("citas"));
-    }
+        $dentistas = Dentista::all();
+        $pacientes = Paciente::all();
 
-    public function crearIndex()
-    {
-        $citas = Citas::all();
-        return view("citas.crear.index", compact("citas"));
+        return view("dashboard", compact("citas","pacientes","dentistas"));
     }
-
     public function crear(Request $request)
     {
-        $validarDatos = $request->validate([
-            'id_cliente' => 'required|integer|exists:pacientes,id',
-            'id_dentista' => 'required|integer|exists:dentistas,id',
+        $citas = Citas::all();
+        $dentistas = Dentista::all();
+        $pacientes = Paciente::all();
+        $id_paciente = $request->input('id');
+
+        return view("citas.crear.index",[
+            'id' => $id_paciente,
+            'cita' => $citas,
+            'paciente' => $pacientes,
+        ], compact('dentistas'));
+    }
+
+    public function almacenar(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'id_dentista' => 'required|exists:dentistas,id',
             'fecha' => 'required|date',
             'hora' => 'required|date_format:H:i',
             'estado' => 'required|in:programada,completada,cancelada',
         ]);
 
-        $citas = Citas::create([
-            'id_cliente' => $validarDatos['id_cliente'],
-            'id_dentista' => $validarDatos['id_dentista'],
-            'fecha' => $validarDatos['fecha'],
-            'hora' => $validarDatos['hora'],
-            'estado' => $validarDatos['estado'] ?? 'programada',
+        Citas::create([
+            'id_cliente' => $id,
+            'id_dentista' => $validated['id_dentista'],
+            'fecha' => $validated['fecha'],
+            'hora' => $validated['hora'],
+            'estado' => $validated['estado'] ?? 'programada',
         ]);
 
-        return redirect()->route('citas.index')->with('success', 'Cita creada con éxito');
+        return redirect()->route('citas.index')->with('success', 'Cita creada exitosamente.');
     }
+
+
     public function eliminar($id)
     {
         $cita = Citas::findOrFail($id); // findOrFail es como un try-catch

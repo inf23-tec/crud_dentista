@@ -15,18 +15,28 @@ Route::post('/paciente/actualizar/{id}', [PacienteController::class, 'actualizar
 
 
 Route::get('/citas', [CitasController::class, 'index'])->name('citas.index');
-Route::post('/citas/crear', [CitasController::class, 'crearIndex'])->name('citas.crear.index');
-Route::post('/citas', [CitasController::class, 'crear'])->name('citas.crear');
-Route::delete('/citas/{id}', [CitasController::class, 'eliminar'])->name('citas.eliminar');
+Route::delete('/citas/delete/{id}', [CitasController::class, 'eliminar'])->name('citas.eliminar');
+
+Route::post('/citas/almacenar/{id}', [CitasController::class, 'almacenar'])->name('citas.almacenar');
+Route::get('/citas/crear', [CitasController::class, 'crear'])->name('citas.crear');
 
 
-// Route::get('/citas', function () {
-//     return view('citas.index');
-// });
+
+
+
+
+
+
+
+
 
 Route::get('/', function () {
-    return view('dashboard');
+    return auth() ? redirect('/dashboard') : redirect('/login');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [CitasController::class, 'index'])->name('dashboard');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

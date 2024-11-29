@@ -34,8 +34,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($pacientes as $paciente)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            @foreach ($pacientes as $paciente)
                             <td class="px-6 py-4">
                                 {{ $paciente->id }}
                             </td>
@@ -55,16 +55,14 @@
                                         @method('DELETE')
                                             <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Eliminar</button>
                                     </form>
-                                    <a href=""></a>
                                     <form action="{{ route('paciente.editar.index', $paciente->id) }}", method="POST">
                                         @csrf
                                             <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Editar</button>
                                     </form>
                                     @if ($pacientes->count() > 0)
-                                        <form action="{{ route('citas.crear.index') }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Crear cita</button>
-                                        </form>
+                                        <a href="{{ route('citas.crear', ['id' => $paciente->id]) }}" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                                            Crear Cita
+                                        </a>
                                     @endif
                                 </div>
                             </td>
